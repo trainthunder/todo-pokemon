@@ -1,0 +1,472 @@
+/* Pokemon Theme Todo List CSS */
+/* Responsive design for mobile and web */
+
+:root {
+  /* Pokemon Color Palette */
+  --pikachu-yellow: #FFD700;
+  --pikachu-yellow-light: #FFF3CD;
+  --pokeball-red: #EE1515;
+  --pokeball-white: #FFFFFF;
+  --pokeball-gray: #333333;
+  --charizard-orange: #FF6B35;
+  --bulbasaur-green: #4CAF50;
+  --squirtle-blue: #2196F3;
+  --background-dark: #1a1a2e;
+  --background-card: #16213e;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B0B0B0;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--background-dark);
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(238, 21, 21, 0.1) 0%, transparent 50%);
+  min-height: 100vh;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Main Container */
+.pokemon-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+.pokemon-header {
+  text-align: center;
+  padding: 30px 20px;
+  margin-bottom: 20px;
+}
+
+.pokemon-header h1 {
+  font-size: 2.5rem;
+  color: var(--pikachu-yellow);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+}
+
+.pokemon-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Filter Tabs */
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  padding: 10px 25px;
+  background: var(--background-card);
+  border: 2px solid var(--pokeball-red);
+  border-radius: 25px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.filter-tab:hover {
+  background: var(--pokeball-red);
+  transform: translateY(-2px);
+}
+
+.filter-tab.active {
+  background: var(--pokeball-red);
+  color: var(--pokeball-white);
+  box-shadow: 0 4px 15px rgba(238, 21, 21, 0.4);
+}
+
+/* Task Form */
+.task-form-container {
+  background: var(--background-card);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 25px;
+  border: 2px solid var(--pikachu-yellow);
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid var(--pokeball-gray);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--pikachu-yellow);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.form-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.btn-submit {
+  padding: 15px 30px;
+  background: linear-gradient(135deg, var(--pikachu-yellow) 0%, #FFA500 100%);
+  border: none;
+  border-radius: 10px;
+  color: var(--pokeball-gray);
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+}
+
+/* Task List */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-card {
+  background: var(--background-card);
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid var(--pokeball-gray);
+  transition: all 0.3s ease;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.task-card:hover {
+  transform: translateX(5px);
+  border-color: var(--pikachu-yellow);
+}
+
+.task-card.completed {
+  opacity: 0.7;
+}
+
+.task-card.completed .task-title {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.task-content {
+  flex: 1;
+  min-width: 200px;
+}
+
+.task-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+
+.task-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-toggle.btn-pending {
+  border-color: var(--text-secondary);
+  color: var(--text-secondary);
+}
+
+.btn-toggle.btn-complete {
+  border-color: var(--bulbasaur-green);
+  color: var(--bulbasaur-green);
+  background: rgba(76, 175, 80, 0.2);
+}
+
+.btn-toggle:hover {
+  transform: scale(1.1);
+}
+
+.btn-edit,
+.btn-delete {
+  padding: 8px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-edit {
+  background: var(--squirtle-blue);
+  color: var(--pokeball-white);
+}
+
+.btn-edit:hover {
+  background: #1976D2;
+}
+
+.btn-delete {
+  background: transparent;
+  border: 1px solid var(--pokeball-red);
+  color: var(--pokeball-red);
+}
+
+.btn-delete:hover {
+  background: var(--pokeball-red);
+  color: var(--pokeball-white);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--text-secondary);
+}
+
+.pokeball-icon {
+  font-size: 4rem;
+  margin-bottom: 15px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Footer */
+.pokemon-footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Error Messages */
+.error-messages {
+  background: rgba(238, 21, 21, 0.2);
+  border: 2px solid var(--pokeball-red);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.error-messages h2 {
+  color: var(--pokeball-red);
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.error-messages ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.error-messages li {
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+/* Back Link */
+.back-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.back-link a {
+  color: var(--pikachu-yellow);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.back-link a:hover {
+  color: var(--pokeball-white);
+}
+
+/* Flash Messages */
+.flash-messages {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.alert {
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  animation: slideIn 0.3s ease;
+}
+
+.alert-notice {
+  background: var(--bulbasaur-green);
+  color: var(--pokeball-white);
+}
+
+.alert-error {
+  background: var(--pokeball-red);
+  color: var(--pokeball-white);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design - Mobile First */
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .pokemon-container {
+    padding: 10px;
+  }
+
+  .pokemon-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .pokemon-subtitle {
+    font-size: 1rem;
+  }
+
+  .filter-tabs {
+    gap: 5px;
+  }
+
+  .filter-tab {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  .task-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .task-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .btn-toggle {
+    width: 35px;
+    height: 35px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  .pokemon-header h1 {
+    font-size: 2rem;
+  }
+
+  .task-card {
+    padding: 15px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+  .task-form {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .form-fields {
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .form-group {
+    flex: 1 1 100%;
+  }
+
+  .form-group:first-child {
+    flex: 2;
+  }
+
+  .btn-submit {
+    width: auto;
+    align-self: flex-end;
+  }
+}

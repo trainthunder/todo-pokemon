@@ -1,0 +1,15 @@
+<!-- filepath: app/views/tasks/edit.html.erb -->
+<div class="pokemon-container">
+  <header class="pokemon-header">
+    <h1>⚡ Edit Task ⚡</h1>
+    <p class="pokemon-subtitle">Time to power up your task!</p>
+  </header>
+
+  <div class="task-form-container">
+    <%= render 'form', task: @task %>
+  </div>
+
+  <div class="back-link">
+    <%= link_to "← Back to Todo List", tasks_path %>
+  </div>
+</div>

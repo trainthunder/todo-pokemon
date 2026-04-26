@@ -1,0 +1,30 @@
+<!-- filepath: app/views/tasks/_form.html.erb -->
+<%= form_with(model: task, local: true, class: "task-form") do |form| %>
+  <% if task.errors.any? %>
+    <div class="error-messages">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+      <ul>
+        <% task.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-fields">
+    <div class="form-group">
+      <%= form.text_field :title, 
+          placeholder: "What's your next quest?", 
+          required: true,
+          class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.text_area :description, 
+          placeholder: "Add some details (optional)",
+          class: "form-textarea" %>
+    </div>
+
+    <%= form.submit "Add Task", class: "btn-submit" %>
+  </div>
+<% end %>

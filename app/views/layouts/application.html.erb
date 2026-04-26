@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Todo" %></title>
+    <title><%= content_for(:title) || "Pokemon Todo List" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Todo">
+    <meta name="application-name" content="Pokemon Todo List">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -24,7 +24,18 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <% if notice %>
+      <div class="flash-messages">
+        <div class="alert alert-notice"><%= notice %></div>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="flash-messages">
+        <div class="alert alert-error"><%= alert %></div>
+      </div>
+    <% end %>
+
+    <main>
       <%= yield %>
     </main>
   </body>
