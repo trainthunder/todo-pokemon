@@ -1,5 +1,5 @@
-<!-- filepath: app/views/tasks/edit.html.erb -->
-<!-- Pokemon Todo List - Edit Task Form -->
+<!-- filepath: app/views/tasks/new.html.erb -->
+<!-- Pokemon Todo List - New Task Form -->
 <div class="pokemon-container">
   <header class="pokemon-header">
     <div class="pokeball-icon">
@@ -7,13 +7,13 @@
       <div class="pokeball-middle"></div>
       <div class="pokeball-bottom"></div>
     </div>
-    <h1>✏️ Edit Quest</h1>
-    <p class="subtitle">"Train hard, fight smart!"</p>
+    <h1>🎯 New Quest</h1>
+    <p class="subtitle">"Every new journey begins with a single step!"</p>
   </header>
   <section class="task-form-section">
     <div class="pokemon-card form-card">
-      <h2>✏️ Edit Task</h2>
-      <%= form_with(model: @task, url: task_path(@task), local: true, class: "task-form") do |form| %>
+      <h2>➕ Create New Task</h2>
+      <%= form_with(model: @task, url: tasks_path, local: true, class: "task-form") do |form| %>
         <% if @task.errors.any? %>
           <div class="alert alert-error">
             <h4>⚠️ Oops! Something went wrong:</h4>
@@ -28,24 +28,17 @@
           <%= form.label :title, "Task Title", class: "form-label" %>
           <%= form.text_field :title, 
               class: "form-input", 
-              placeholder: "Task title",
+              placeholder: "e.g., Catch a Pikachu",
               required: true %>
         </div>
         <div class="form-group">
           <%= form.label :description, "Description", class: "form-label" %>
           <%= form.text_area :description, 
               class: "form-textarea", 
-              placeholder: "Task description..." %>
-        </div>
-        <div class="form-group">
-          <%= form.label :completed, "Status", class: "form-label" %>
-          <div class="checkbox-wrapper">
-            <%= form.check_box :completed, class: "form-checkbox" %>
-            <span class="checkbox-label"><%= @task.completed ? "✅ Completed" : "⏳ In Progress" %></span>
-          </div>
+              placeholder: "Describe your quest..." %>
         </div>
         <div class="form-actions">
-          <%= form.submit "💾 Save Changes", class: "btn btn-primary" %>
+          <%= form.submit "🎯 Create Task", class: "btn btn-primary" %>
           <%= link_to "↩️ Cancel", tasks_path, class: "btn btn-secondary" %>
         </div>
       <% end %>

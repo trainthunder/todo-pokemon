@@ -10,19 +10,12 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "tasks#index"
 
+  # Task resources for CRUD operations
   resources :tasks do
     member do
-      patch :toggle_complete
+      patch :toggle  # Custom route for toggling task completion
     end
   end
-
-  resources :tasks do
-    collection do
-      get :filter
-    end
-  end
-
-  root "tasks#index"
 end

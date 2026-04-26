@@ -1,56 +1,104 @@
 <!-- filepath: app/views/tasks/index.html.erb -->
+<!-- Pokemon Todo List - Main Index View -->
+<!-- Responsive design for mobile and web app -->
 <div class="pokemon-container">
+  <!-- Header with Pokemon Theme -->
   <header class="pokemon-header">
-    <h1>⚡ Pokemon Todo List ⚡</h1>
-    <p class="pokemon-subtitle">Gotta Complete 'Em All!</p>
+    <div class="pokeball-icon">
+      <div class="pokeball-top"></div>
+      <div class="pokeball-middle"></div>
+      <div class="pokeball-bottom"></div>
+      <div class="pokeball-center"></div>
+    </div>
+    <h1>📋 Pokemon Todo List</h1>
+    <p class="subtitle">"Gotta catch 'em all!" - Complete your tasks like a Pokemon Trainer</p>
   </header>
-
-  <div class="filter-tabs">
-    <%= link_to "All", tasks_path(filter: nil), class: filter_class(nil) %>
-    <%= link_to "Active", tasks_path(filter: 'active'), class: filter_class('active') %>
-    <%= link_to "Completed", tasks_path(filter: 'completed'), class: filter_class('completed') %>
-  </div>
-
-  <div class="task-form-container">
-    <%= render 'form', task: Task.new %>
-  </div>
-
-  <div class="task-list">
-    <% if @tasks.any? %>
-      <% @tasks.each do |task| %>
-        <div class="task-card <%= 'completed' if task.completed %>">
-          <div class="task-content">
-            <div class="task-title"><%= task.title %></div>
-            <% if task.description.present? %>
-              <div class="task-description"><%= task.description %></div>
-            <% end %>
-          </div>
-          
-          <div class="task-actions">
-            <%= button_to toggle_complete_task_path(task), 
-                method: :patch, 
-                class: "btn-toggle #{task.completed ? 'btn-complete' : 'btn-pending'}",
-                title: task.completed ? "Mark as incomplete" : "Mark as complete" do %>
-              <%= task.completed ? "✓" : "○" %>
-            <% end %>
-            
-            <%= link_to "Edit", edit_task_path(task), class: "btn-edit" %>
-            <%= button_to "Delete", task_path(task), 
-                method: :delete, 
-                data: { confirm: "Are you sure you want to release this task?" },
-                class: "btn-delete" %>
-          </div>
+  <!-- Task Creation Form -->
+  <section class="task-form-section">
+    <div class="pokemon-card form-card">
+      <h2>➕ Add New Task</h2>
+      <%= form_with(model: @task || Task.new, url: tasks_path, local: true, class: "task-form") do |form| %>
+        <div class="form-group">
+          <%= form.label :title, "Task Title", class: "form-label" %>
+          <%= form.text_field :title, 
+              class: "form-input", 
+              placeholder: "e.g., Defeat Brock at Pewter City",
+              required: true %>
+        </div>
+        <div class="form-group">
+          <%= form.label :description, "Description", class: "form-label" %>
+          <%= form.text_area :description, 
+              class: "form-textarea", 
+              placeholder: "Add more details about your task..." %>
+        </div>
+        <div class="form-actions">
+          <%= form.submit "🎯 Add Task", class: "btn btn-primary" %>
         </div>
       <% end %>
+    </div>
+  </section>
+  <!-- Task List -->
+  <section class="task-list-section">
+    <div class="section-header">
+      <h2>🎒 Your Quests</h2>
+      <div class="task-stats">
+        <span class="stat completed">✅ Completed: <%= @tasks.where(completed: true).count %></span>
+        <span class="stat pending">⏳ Pending: <%= @tasks.where(completed: false).count %></span>
+      </div>
+    </div>
+    <% if @tasks.any? %>
+      <div class="task-grid">
+        <% @tasks.each do |task| %>
+          <article class="task-card <%= 'completed' if task.completed %>">
+            <div class="task-pokemon-badge">
+              <span class="pokemon-emoji"><%= task.completed ? '⭐' : '🔴' %></span>
+            </div>
+            <div class="task-content">
+              <h3 class="task-title"><%= task.title %></h3>
+              <% if task.description.present? %>
+                <p class="task-description"><%= task.description %></p>
+              <% end %>
+              <div class="task-meta">
+                <span class="task-date">📅 <%= task.created_at.strftime("%B %d, %Y") %></span>
+              </div>
+            </div>
+            <div class="task-actions">
+              <!-- Toggle Complete Button -->
+              <%= button_to toggle_task_path(task), 
+                  method: :patch, 
+                  class: "btn btn-toggle #{task.completed ? 'btn-undo' : 'btn-complete'}",
+                  title: task.completed ? "Mark as incomplete" : "Mark as complete" do %>
+                <%= task.completed ? '↩️ Undo' : '✅ Complete' %>
+              <% end %>
+              <!-- Edit Button -->
+              <%= link_to edit_task_path(task), 
+                  class: "btn btn-edit",
+                  title: "Edit task" do %>
+                ✏️ Edit
+              <% end %>
+              <!-- Delete Button -->
+              <%= button_to task_path(task), 
+                  method: :delete, 
+                  class: "btn btn-delete",
+                  title: "Delete task",
+                  data: { confirm: "Are you sure you want to release this task?" } do %>
+                🗑️ Release
+              <% end %>
+            </div>
+          </article>
+        <% end %>
+      </div>
     <% else %>
       <div class="empty-state">
-        <div class="pokeball-icon">⚪</div>
-        <p>No tasks found! Time to catch 'em all!</p>
+        <div class="empty-pokemon">🐛</div>
+        <h3>No quests yet!</h3>
+        <p>Start your adventure by adding your first task above.</p>
+        <p class="pokemon-quote">"There's no time like the present to start training!"</p>
       </div>
     <% end %>
-  </div>
-
+  </section>
+  <!-- Footer -->
   <footer class="pokemon-footer">
-    <p>🌟 <%= Task.count %> tasks registered | <%= Task.where(completed: true).count %> completed</p>
+    <p>🌟 "Believe in your Pokemon and your Pokemon will believe in you!" 🌟</p>
   </footer>
 </div>

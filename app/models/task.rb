@@ -1,24 +1,48 @@
+# frozen_string_literal: true
+
+# Task Model - Represents a todo item in the Pokemon Todo List
+# Follows Clean Code principles with clear validations and scopes
 class Task < ApplicationRecord
-  # Validations - Ensure data integrity
-  validates :title, presence: { message: "cannot be blank" }
-  validates :title, length: { maximum: 255, too_long: "must be less than 255 characters" }
-  validates :description, length: { maximum: 1000, too_long: "must be less than 1000 characters" }
+  # ============================================
+  # Associations
+  # ============================================
 
-  # Default scope - Order by creation date (newest first)
-  default_scope { order(created_at: :desc) }
+  # ============================================
+  # Validations
+  # ============================================
+  validates :title,
+            presence: { message: "can't be blank" },
+            length: { maximum: 255, message: "is too long (maximum is 255 characters)" }
 
-  # Scopes - Reusable query methods
-  scope :completed_tasks, -> { where(completed: true) }
-  scope :incomplete_tasks, -> { where(completed: false) }
+  validates :description,
+            length: { maximum: 1000, message: "is too long (maximum is 1000 characters)" },
+            allow_nil: true
+
+  # ============================================
+  # Callbacks
+  # ============================================
+  before_validation :strip_whitespace
+
+  # ============================================
+  # Scopes
+  # ============================================
+  scope :completed, -> { where(completed: true) }
+  scope :incomplete, -> { where(completed: false) }
   scope :recent, -> { order(created_at: :desc) }
 
-  # Callback - Set default values
-  before_validation :trim_title
+  # ============================================
+  # Instance Methods
+  # ============================================
+
+  # Toggle completion status
+  def toggle_completion!
+    toggle!(:completed)
+  end
 
   private
 
-  # Clean Code: Small method with single responsibility
-  def trim_title
+  # Strip whitespace from title before validation
+  def strip_whitespace
     self.title = title.strip if title.present?
   end
 end

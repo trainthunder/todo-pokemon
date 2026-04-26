@@ -1,97 +1,91 @@
-# Pokemon TodoList App - Development Context
+# Pokemon Todo List - Project Context
 
-## Project Overview
-- **Project Name**: Pokemon TodoList
-- **Type**: Web Application (Ruby on Rails)
-- **Core Functionality**: Todo list management with Pokemon-themed UI
-- **Target Users**: General users who want to manage tasks with fun Pokemon design
+## สรุปการสนทนา
 
-## Requirements
+**วันที่**: 26 เมษายน 2026  
+**ผู้ใช้**: User  
+**AI Assistant**: GitHub Copilot (MiniMax M2.5)
 
-### 1. Functional Requirements
-- Create, Read, Update, Delete (CRUD) for Todo items
-- Mark todo as complete/incomplete
-- Filter: All, Active, Completed todos
-- Responsive design for mobile and web
+### ความต้องการของผู้ใช้
 
-### 2. UI/UX Requirements (Pokemon Theme)
-- Pokemon color palette (e.g., Pikachu yellow, Pokeball red/white)
-- Pokemon-inspired icons and decorations
-- Fun, engaging design suitable for all ages
-- Mobile-first responsive design
+1. **สร้าง Todo List Application** พร้อม Theme Pokemon
+2. **Responsive Design** - รองรับทั้ง Mobile และ Web App
+3. **ใช้ Engineering Practices**:
+   - Clean Code
+   - Code Smell Detection
+   - TDD (Test-Driven Development)
+   - BDD (Behavior-Driven Development)
+4. **บันทึก Context** การสนทนาไว้ใน prompts.md
 
-### 3. Technical Requirements
-- Ruby on Rails 7.x
-- SQLite for development
-- Clean Code principles
-- Code smell detection and prevention
+### สิ่งที่สร้างแล้ว
 
-## Engineering Practices
+- [x] **Routes** - Task resources พร้อม custom toggle route
+- [x] **TasksController** - CRUD operations พร้อม clean code
+- [x] **Task Model** - Validations, scopes, callbacks
+- [x] **Views** - index, new, edit พร้อม Pokemon theme
+- [x] **CSS** - Responsive design (mobile, tablet, desktop)
+- [x] **Tests** - Model tests (11 passing), Controller tests (16 passing)
 
-### Clean Code Principles Applied
-1. **Meaningful Names**: 
-   - `Task` model instead of `Todo` (avoid reserved word)
-   - `toggle_complete` method for status change
-   - `filter_class` helper for CSS classes
+### โครงสร้างไฟล์ที่สร้าง
 
-2. **Small Methods**: 
-   - Each controller action does one thing
-   - Private `task_params` and `find_task` methods
-   - `trim_title` callback in model
+```
+app/
+├── controllers/
+│   └── tasks_controller.rb      # CRUD operations
+├── models/
+│   └── task.rb                 # Validations, scopes
+├── views/
+│   └── tasks/
+│       ├── index.html.erb      # Main todo list
+│       ├── new.html.erb        # Create task form
+│       └── edit.html.erb       # Edit task form
+└── assets/stylesheets/
+    └── pokemon.css             # Responsive Pokemon theme
 
-3. **DRY (Don't Repeat Yourself)**: 
-   - Reusable `_form` partial
-   - `filter_class` helper method
-   - Scopes in model for reusable queries
+test/
+├── models/
+│   └── task_test.rb            # TDD tests (11 tests)
+└── controllers/
+    └── tasks_controller_test.rb # BDD tests (16 tests)
+```
 
-4. **Proper Validations**: 
-   - Title presence validation
-   - Length constraints
-   - Custom error messages
+### Engineering Practices ที่ใช้
 
-### Code Smell Detection & Prevention
-- ✅ No long methods (> 20 lines)
-- ✅ No duplicate code (partials and helpers)
-- ✅ Consistent naming conventions
-- ✅ Proper error handling with validations
-- ✅ Loose coupling (before_action for setup)
+1. **Clean Code**:
+   - Single Responsibility Principle
+   - Clear method names
+   - Proper comments and documentation
+   - Frozen string literals
 
-## Development Plan
+2. **Code Smell Prevention**:
+   - Validations in model
+   - Callbacks for data consistency
+   - Scopes for reusable queries
 
-### Phase 1: Setup
-- [x] Create Task model with migration
-- [x] Setup routes and controller
+3. **TDD (Test-Driven Development)**:
+   - เขียน tests ก่อน implementation
+   - Model tests ครอบคลุม validations, CRUD, scopes
 
-### Phase 2: Core Features
-- [x] CRUD operations for tasks
-- [x] Status toggle (complete/incomplete)
-- [x] Filter functionality
+4. **BDD (Behavior-Driven Development)**:
+   - Controller tests อธิบาย behavior
+   - Clear test names อธิบาย scenario
+   - Setup/teardown patterns
 
-### Phase 3: UI/UX
-- [x] Pokemon theme CSS
-- [x] Responsive layout
-- [x] Mobile optimization
+### Responsive Breakpoints
 
-### Phase 4: Code Quality
-- [x] Refactor for Clean Code
-- [x] Remove code smells
-- [x] Add proper validations
+- Mobile: 320px - 480px
+- Tablet: 481px - 768px
+- Small Desktop: 769px - 1024px
+- Large Desktop: 1025px+
 
-## Current Status
-- [x] Project initialized
-- [x] Task model created with validations
-- [x] CRUD implemented
-- [x] Theme applied (Pokemon)
-- [x] Responsive verified (mobile + web)
-- [x] Code quality checked
+### Pokemon Theme Features
 
-## Files Created/Modified
-- `app/models/task.rb` - Task model with validations and scopes
-- `app/controllers/tasks_controller.rb` - CRUD controller
-- `app/views/tasks/index.html.erb` - Main todo list view
-- `app/views/tasks/_form.html.erb` - Reusable form partial
-- `app/views/tasks/edit.html.erb` - Edit task view
-- `app/helpers/tasks_helper.rb` - Helper methods
-- `app/assets/stylesheets/pokemon.css` - Pokemon theme CSS
-- `app/views/layouts/application.html.erb` - Updated layout
-- `config/routes.rb` - Routes configuration
+- Pokeball animated header
+- Color palette (red, blue, yellow, green)
+- Pokemon quotes
+- Task status badges
+- Card hover effects
+
+---
+
+*อัพเดตล่าสุด: 26 เมษายน 2026*
